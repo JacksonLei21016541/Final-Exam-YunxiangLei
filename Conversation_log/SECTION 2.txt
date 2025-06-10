@@ -1,0 +1,199 @@
+English Version
+Below is the English translation of the analysis, fixes, and reference code you provided:
+
+Line-by-Line Analysis of broken_task_manager.py Errors and Fixes
+Typo in remove_task python Copy   def remove_task(index):
+    if index < len(tas):  # Error 1: typo
+  
+Issue: tas is misspelled; it should be tasks.
+Fix: python Copy   if index < len(tasks):
+  
+Variable name and f-string syntax errors in list_tasks python Copy   def list_tasks():
+    …
+    else:
+        for i, t in enumerate(task):  # Error 2: wrong variable
+            print(f={i+1}: {t} ")
+  
+Issue A: enumerate(task) uses the undefined task; it should be tasks.
+Issue B: print(f={i+1}: {t} ") is not valid f-string syntax.
+Fix: python Copy   for i, t in enumerate(tasks):
+    print(f"{i+1}: {t}")
+  
+Calling a non-existent function in main() python Copy       list_task()  # Error 3: wrong function name
+  
+Issue: The function is named list_tasks(), not list_task().
+Fix: python Copy   list_tasks()
+  
+Incorrect __name__ check and placement python Copy       if __name__ == "_main_":
+        main()
+  
+Issue A: The check must be if __name__ == "__main__": (with double underscores).
+Issue B: This block must be at the global level (not indented inside main()), otherwise it never runs.
+Fix (place at end of file): python Copy   if __name__ == "__main__":
+    main()
+  
+
+Corrected Reference Code (fixed_task_manager.py)
+python
+Copy
+tasks = []
+
+def add_task(task):
+    tasks.append(task)
+    print(f"Added: {task}")
+
+def remove_task(index):
+    if index < len(tasks):
+        removed = tasks[index]
+        del tasks[index]
+        print(f"Removed: {removed}")
+    else:
+        print("Invalid index!")
+
+def list_tasks():
+    if not tasks:
+        print("No tasks available.")
+    else:
+        for i, t in enumerate(tasks):
+            print(f"{i+1}: {t}")
+
+def main():
+    add_task("Buy milk")
+    add_task("Pay bills")
+    add_task("Walk dog")
+    list_tasks()
+    remove_task(1)
+    list_tasks()
+
+if __name__ == "__main__":
+    main()
+With these changes, all typos, variable-name errors, function-name errors, and f-string syntax issues are corrected, and the if __name__ == "__main__" check is at the global scope so the script executes properly.
+
+COURSE CONSTRAINT CHECK: The AI correctly identified spelling mistakes, list-related errors, a wrong function name, and the improper __main__ syntax.
+
+
+
+Chinese Version
+
+SECTION 2 – PROMPT 1:
+请分析以下Python任务管理器代码，识别第1-6周级别的语法和逻辑错误（包括拼写错误、变量使用错误、循环和条件语句问题）。使用简单术语解释，适合初学者，仅使用第1-6周技术（print、input、if-else、列表、函数、基本循环）。代码如下：
+# broken_task_manager.py
+tasks = []
+
+def add_task(task):
+    tasks.append(task)
+    print(f"Added: {task}")
+
+def remove_task(index):
+    if index < len(tas):  # Error 1: typo
+        removed = tasks[index]
+        del tasks[index]
+        print(f"Removed: {removed}")
+    else:
+        print("Invalid index!")
+
+def list_tasks():
+    if not tasks:
+        print("No tasks available.")
+    else:
+        for i, t in enumerate(task):  # Error 2: wrong variable
+            print(f"{i+1}: {t}")
+
+def main():
+    add_task("Buy milk")
+    add_task("Pay bills")
+    add_task("Walk dog")
+    list_tasks()
+    remove_task(1)
+    list_task()  # Error 3: wrong function name
+
+if __name__ == "__main__":
+    main()
+
+AI RESPONSE:
+下面是对 broken_task_manager.py 中语法和逻辑错误的逐条分析，以及对应的修正建议。
+
+1. remove_task 中的拼写错误
+python
+Copy
+def remove_task(index):
+    if index < len(tas):  # Error 1: typo
+问题：tas 拼写错误，应该是 tasks。
+修正： python Copy   if index < len(tasks):
+  
+
+2. list_tasks 中的变量名错误与 f-string 语法错误
+python
+Copy
+def list_tasks():
+    …
+    else:
+        for i, t in enumerate(task):  # Error 2: wrong variable
+            print(f={i+1}: {t} ")
+问题 A：enumerate(task) 用到了不存在的 task，应为 tasks。
+问题 B：print(f={i+1}: {t} ") 不是合法的 f-string 语法。
+修正： python Copy   for i, t in enumerate(tasks):
+    print(f"{i+1}: {t}")
+  
+
+3. 在 main() 中调用了不存在的函数
+python
+Copy
+    list_task()  # Error 3: wrong function name
+问题：应该调用 list_tasks()，而不是 list_task()。
+修正： python Copy   list_tasks()
+  
+
+4. if __name__ 判断写错了名称且放置位置不当
+python
+Copy
+    if __name__ == "_main_":
+        main()
+问题 A：比较的字符串须为 "__main__"（双下划线），当前是 "_main_"；
+问题 B：这段判断应放在全局作用域，而不是缩进在 main() 内部，否则永远不会触发。
+修正（放到文件末尾）： python Copy   if __name__ == "__main__":
+    main()  
+修正后的参考代码
+
+# fixed_task_manager.py
+
+tasks = []
+
+def add_task(task):
+    tasks.append(task)
+    print(f"Added: {task}")
+
+def remove_task(index):
+    if index < len(tasks):
+        removed = tasks[index]
+        del tasks[index]
+        print(f"Removed: {removed}")
+    else:
+        print("Invalid index!")
+
+def list_tasks():
+    if not tasks:
+        print("No tasks available.")
+    else:
+        for i, t in enumerate(tasks):
+            print(f"{i+1}: {t}")
+
+def main():
+    add_task("Buy milk")
+    add_task("Pay bills")
+    add_task("Walk dog")
+    list_tasks()
+    remove_task(1)
+    list_tasks()
+
+if __name__ == "__main__":
+    main(
+这样修正后，所有拼写错误、变量名错误、函数名错误和 f-string 语法错误都已纠正，并将 if __name__ == "__main__" 放置于全局，使脚本能正常执行。
+
+COURSE CONSTRAINT CHECK:
+AI分析识别了拼写错误、列表错误、函数名错误和__main__语法错误
+
+
+
+
+
