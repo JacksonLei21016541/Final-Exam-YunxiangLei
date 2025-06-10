@@ -11,3 +11,4 @@ This repository contains my final exam submission, completed using Google Colab 
 **Completion Status**: All sections completed, tagged as v1.0.
 
 **Additional Note**: This assignment was completed in Chinese, and all translations into English were performed by AI to meet submission requirements. All AI interactions are documented in `conversation_log.txt`.
+**Additional Note**: Interaction records are provided in English and Chinese, with English on top and Chinese on the bottom.
